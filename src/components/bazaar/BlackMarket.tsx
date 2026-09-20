@@ -15,7 +15,7 @@ import { RuneButton } from '../ui/RuneButton'
 import { ToastBanner } from '../ui/ToastBanner'
 import { itemSprite } from '../../utils/itemArt'
 
-type KindFilter = 'all' | 'delver' | 'item'
+type KindFilter = 'all' | 'delver' | 'item' | 'mine'
 
 const PAGE_SIZE = 12
 const STATS: StatBarKey[] = ['mining', 'power', 'armor', 'luck', 'speed', 'sanity']
@@ -33,12 +33,16 @@ export function BlackMarket() {
   const rows = useMemo(() => {
     const needle = query.trim().toLowerCase()
     return player.marketListings.filter((listing) => {
-      if (kind !== 'all' && listing.asset.kind !== kind) return false
+      if (kind === 'mine') {
+        if (listing.sellerId !== seller) return false
+      } else if (kind !== 'all' && listing.asset.kind !== kind) {
+        return false
+      }
       if (!needle) return true
       const name = listing.asset.kind === 'delver' ? listing.asset.delver.name : listing.asset.item.name
       return name.toLowerCase().includes(needle) || listing.sellerName.toLowerCase().includes(needle)
     })
-  }, [kind, player.marketListings, query])
+  }, [kind, player.marketListings, query, seller])
 
   const pageCount = Math.max(1, Math.ceil(rows.length / PAGE_SIZE))
   const current = Math.min(page, pageCount - 1)
@@ -89,14 +93,21 @@ export function BlackMarket() {
         <ToastBanner message={toast.message} tone={toast.tone} onClose={() => setToast(null)} durationMs={4800} />
       )}
       <div className="mb-4 flex flex-wrap items-center gap-2">
-        {(['all', 'delver', 'item'] as const).map((entry) => (
+        {(
+          [
+            { id: 'all', label: 'All' },
+            { id: 'delver', label: 'Blades' },
+            { id: 'item', label: 'Relics' },
+            { id: 'mine', label: 'Nailed' },
+          ] as const
+        ).map((entry) => (
           <button
-            key={entry}
+            key={entry.id}
             type="button"
-            className={`bazaar-tab font-body ${kind === entry ? 'is-on' : ''}`}
-            onClick={() => setKind(entry)}
+            className={`bazaar-tab font-body ${kind === entry.id ? 'is-on' : ''}`}
+            onClick={() => setKind(entry.id)}
           >
-            {entry === 'all' ? 'All' : entry === 'delver' ? 'Blades' : 'Relics'}
+            {entry.label}
           </button>
         ))}
         <input
@@ -108,11 +119,17 @@ export function BlackMarket() {
         />
       </div>
       <p className="mb-3 font-body text-[11px] uppercase tracking-[0.16em] text-white/40">
-        {rows.length} on the board · click a card to read it
+        {kind === 'mine'
+          ? `${rows.length} nailed under your mark · click to revoke or inspect`
+          : `${rows.length} on the board · click a card to read it`}
       </p>
       <div className="bazaar-hall">
         {slice.length === 0 && (
-          <p className="font-body text-sm text-white/60">The hall is quiet. No one is selling that.</p>
+          <p className="font-body text-sm text-white/60">
+            {kind === 'mine'
+              ? 'Nothing of yours is nailed to the board. Post from My Consignments.'
+              : 'The hall is quiet. No one is selling that.'}
+          </p>
         )}
         {slice.map((listing) => (
           <HallCard

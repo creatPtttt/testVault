@@ -7,6 +7,8 @@
 @layer base {
   html {
     -webkit-tap-highlight-color: transparent;
+    /* Keep layout still when a page gains/loses a vertical scrollbar */
+    scrollbar-gutter: stable;
     scrollbar-width: thin;
     scrollbar-color: #B8860B #0A0B0E;
   }
