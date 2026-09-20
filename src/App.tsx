@@ -15,6 +15,7 @@ import { ExpeditionsPage } from './pages/ExpeditionsPage'
 import { BazaarPage } from './pages/BazaarPage'
 import { ShrinePage } from './pages/ShrinePage'
 import { TownHubPage } from './pages/TownHubPage'
+import { WhitepaperPage } from './pages/WhitepaperPage'
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Routes>
           <Route path="/" element={<GatePage />} />
           <Route path="/town" element={<TownHubPage />} />
+          <Route path="/whitepaper" element={<WhitepaperPage />} />
           <Route
             path="/camp"
             element={

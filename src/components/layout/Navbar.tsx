@@ -61,6 +61,10 @@ export function Navbar() {
             Gate
           </Link>
 
+          <Link to="/whitepaper" className="game-hud-gate-link hidden sm:inline" title="The Abyssal Codex">
+            Codex
+          </Link>
+
           <a
             href="https://x.com/AbyssalVault"
             target="_blank"
