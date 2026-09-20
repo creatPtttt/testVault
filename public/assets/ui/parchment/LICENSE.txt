@@ -1,0 +1,4 @@
+Parchment GUI (buttons/labels/panels/slots) — zwonky / OpenGameArt — CC0
+Dark World Asset Pack — Kaishido — CC0
+Dark ARPG UI — vault13dweller — CC-BY 4.0 (see sources.txt in _src/dark-arpg)
+Sliced for RuneDelve vault modals (distinct from Gate Dragon Regalia chrome).

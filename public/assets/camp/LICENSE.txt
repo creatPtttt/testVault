@@ -1,0 +1,12 @@
+Barracks yard: barracks-yard.png
+Armory Vault: armory-vault.png
+Muster Fire: muster-fire.png (interactive building → ledger)
+
+Portraits (GIF idle loops) — LuizMelo CC0 on itch.io:
+  arcanist.gif  — Evil Wizard 3        → Rune Arcanist
+  rogue.gif     — Medieval Warrior Pack 2 → Ashen Rogue
+  warden.gif    — Wizard Pack          → Sanity Warden
+  geomancer.gif — Evil Wizard 2        → Vault Geomancer
+  paladin.gif   — Medieval Warrior Pack 3 → Breaker Paladin
+
+Rebuild: python scripts/build_job_portraits.py
