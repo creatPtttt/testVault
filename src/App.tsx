@@ -8,6 +8,7 @@ import { Navbar } from './components/layout/Navbar'
 import { PageTransition } from './components/layout/PageTransition'
 import { SigilAwait } from './components/SigilAwait'
 import { VaultBound } from './components/VaultBound'
+import { GameCursor } from './components/GameCursor'
 import { WalletGate } from './components/WalletGate'
 import { GatePage } from './pages/GatePage'
 import { CampPage } from './pages/CampPage'
@@ -23,6 +24,7 @@ function App() {
       <div className="min-h-screen bg-obsidian font-body text-white">
         <Navbar />
         <PageTransition />
+        <GameCursor />
         <SigilAwait />
         <VaultBound />
 
